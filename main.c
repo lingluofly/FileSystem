@@ -110,14 +110,15 @@ void write_file() {
         return;
     }
 
-    printf("请输入文件内容（输入EOF结束，Windows下按Ctrl+Z）：\n");
-    fflush(stdin);
+    printf("请输入文件内容（Windows下按Ctrl+Z，Linux下按Ctrl+D结束）：\n");
     while (fgets(content, sizeof(content), stdin) != NULL) {
         fputs(content, file);
     }
 
     fclose(file);
     printf("文件写入成功\n");
+    // 清除EOF标志，避免影响后续输入
+    clearerr(stdin);
 }
 
 // 读文件
